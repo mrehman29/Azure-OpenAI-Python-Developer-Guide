@@ -1,0 +1,3 @@
+DB_CONNECTION_STRING="mongodb+srv://hackathonadmin:Gr779gmcxE7oYBM@aihackathon.mongocluster.cosmos.azure.com/?tls=true&authMechanism=SCRAM-SHA-256&retrywrites=false&maxIdleTimeMS=120000"
+AOAI_ENDPOINT = "https://polite-ground-030dc3103.4.azurestaticapps.net/api/v1"
+AOAI_KEY = "13178a16-adfb-410f-bc94-5417d49cb030"

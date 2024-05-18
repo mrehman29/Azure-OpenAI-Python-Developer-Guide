@@ -9,21 +9,22 @@ from typing import List
 import pymongo
 from dotenv import load_dotenv
 from langchain.chat_models import AzureChatOpenAI
-from langchain.embeddings import AzureOpenAIEmbeddings
+# from langchain.embeddings import AzureOpenAIEmbeddings
 from langchain.vectorstores.azure_cosmos_db import AzureCosmosDBVectorSearch
 from langchain.schema.document import Document
 from langchain.agents import Tool
 from langchain.agents.agent_toolkits import create_conversational_retrieval_agent
 from langchain.tools import StructuredTool
 from langchain_core.messages import SystemMessage
+from langchain_openai import AzureOpenAIEmbeddings
 
 load_dotenv(".env")
 DB_CONNECTION_STRING = os.environ.get("DB_CONNECTION_STRING")
 AOAI_ENDPOINT = os.environ.get("AOAI_ENDPOINT")
 AOAI_KEY = os.environ.get("AOAI_KEY")
 AOAI_API_VERSION = "2023-09-01-preview"
-COMPLETIONS_DEPLOYMENT = "completions"
-EMBEDDINGS_DEPLOYMENT = "embeddings"
+COMPLETIONS_DEPLOYMENT = "gpt-4"
+EMBEDDINGS_DEPLOYMENT = "text-embedding-3-small"
 db = pymongo.MongoClient(DB_CONNECTION_STRING).cosmic_works
 
 class CosmicWorksAIAgent:
@@ -60,6 +61,10 @@ class CosmicWorksAIAgent:
                 If you don't know the answer to a question, respond with "I don't know."
 
                 Only answer questions related to Cosmic Works products, customers, and sales orders.
+                
+                If a question is relate to participating in Microsoft Developer AI Learning Hackathon then say something like
+                its good opertinity and wish best of luck, and mention that if  their is any questions 
+                related to Cosmic Works products, customers, or sales orders feel free to ask
                 
                 If a question is not related to Cosmic Works products, customers, or sales orders,
                 respond with "I only answer questions about Cosmic Works"
